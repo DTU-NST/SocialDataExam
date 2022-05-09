@@ -1,0 +1,10 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Social Data Final Project'
+mainSections = ["posts"]
+theme= 'hugo-theme-notrack'
+
+[params]
+  author = "Niels Bisgaard-Bohr, Simon Pontoppidan and Thomas Rathsach Strange"
+  siteHeading = "Social Data Project" # defaults to author
+  mainSections = ["posts"]
