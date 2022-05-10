@@ -9,7 +9,7 @@ menu:
 ---
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 {{< load-plotly >}}
-{{< plotly json="/plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< plotly json="/plotly/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
 
