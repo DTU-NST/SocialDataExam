@@ -4,6 +4,6 @@
 <div id="{{$json}}" class="plotly" style="height:{{$height}}  width:{{$width}}"></div>
 <script>
 Plotly.d3.json({{$json}}, function(err, fig) {
-    Plotly.plot('{{$json}}', fig.data, fig.layout, {responsive: true});
+    Plotly.plot('{{$json}}', fig.data, fig.layout, {responsive: true, rendering: 'notebook'});
 });
 </script>

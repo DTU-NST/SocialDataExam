@@ -1,15 +1,13 @@
 ---
-title: "San Francisco building emissions"
+title: "Examining San Francisco building energy usage intensity"
 date: "2022-05-07"
+plotly: true
 menu:
   main:
     title: "Home"
     weight: 1
   
 ---
-{{< load-plotly >}}
-
-{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
@@ -17,7 +15,7 @@ The global pandemic has only just released its grip on much of the world, but wh
 ---
 **What is EUI**
 
-Energy use intensity (EUI) is an indicator of the energy efficiency of a building’s design and/or operations[2]
+Energy use intensity (EUI) is an indicator of the energy efficiency of a building's design and/or operations[2]
 ---
 
 ## You have your dataset, now what?
@@ -39,7 +37,9 @@ Now for the fun parts of data analysis, exploring the nooks and crannies of your
 
 ### Controlled pattern exploration
 
-These questions helps you define your objective (if any) and provide you with hypothesis that you can explore by creating specific visualizations or plots related to the hypothesis. Our objective was to reduce overall building emissions in San Francisco by reducing the overall EUI. We then explored the current trends in our dataset, which shows that the overall EUI of San Francisco is currently trending downwards. 
+These questions helps you define your objective (if any) and provide you with hypothesis that you can explore by creating specific visualizations or plots related to the hypothesis. Our objective was recommend focus areas to reduce overall building emissions in San Francisco by reducing the overall EUI. We then explored the current trends in our dataset, which shows that the overall EUI of San Francisco is currently trending downwards. 
+
+{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 
 As we are looking to reduce building EUI in the future, we are looking for features that can be shown to be correlated with building EUI. When going through the features in our dataset, we identified three candidate features that could be correlated with building EUI: 
 
@@ -53,15 +53,30 @@ We started by examining the floor area and year built features by visualizing th
 
 We found that, while both correlate with EUI to a small degree, they are not entirely able to explain the large variations in EUI between various buildings. 
 
-Next, we decided to examine the self reported property type by exploring which industries' had the highest building EUI. This proved to be a hard task, as not all industries are equally represented and as some industries simply need a larger power consumption to function, thereby inflating it's building EUI. We noticed the Offices and Data center industries as extreme examples of this. Offices are extremely overrepresented in the dataset, but each individual office does not have a high building EUI. In contrast, there are very few data centers, but each data center has a very high building EUI, as they inherently consume a lot of energy to power all the computing units. As we can observe that different industries have vastly differing building EUI values, we concluded industries are correlated with building EUI, but we could not entirely explain the correlation. 
+Next, we decided to examine the self reported property type by exploring which industries' had the highest building EUI. 
+
+%INSERT BAR PLOT
+{{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+
+This proved to be a hard task, as not all industries are equally represented and some industries simply need a larger power consumption to function, thereby inflating its building EUI. 
+
+%INSERT TREEPLOT
+{{< plotly json="../../plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
+
+We noticed the Offices and Data center industries as extreme examples of this. Offices are extremely overrepresented in the dataset, but each individual office does not have a high building EUI. In contrast, there are very few data centers, but each data center has a very high building EUI, as they inherently consume a lot of energy to power all the computing units. 
+
+%INSERT A BOXPLOT
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+
+As we can observe, different industries have vastly differing building EUI values, we concluded industries are correlated with building EUI, but we could not entirely explain the correlation. 
 
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
-{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/percentage_change_by_industry_relative_2012.json" height="800px" width="800px">}}
 
 From this, we can observe that while most industries are clearly trending towards a lower median building EUI, a few are not. %WRITE WHICH
 
-We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter the dark and scary territory of machine learning. %EVALUATE?? CAN THIS BE USED??
+We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter realms of machine learning. %EVALUATE?? CAN THIS BE USED??
 
 
 ## Creating predictions
@@ -74,13 +89,15 @@ We can observe that building EUI is seemingly dependant on the industry connecte
 
 Based on the predictions obtained from the model, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
 
-{{< plotly json="../../plotly/percentage_change_by_industry_relative_2012.json" height="800px" width="800px" modebar="false">}}
+{{<  plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
 This shows that many industries follow the overall trend of building EUI, while others don't. We are therefore interested in using our model to predict what will happen for the foreseeable future: 
 
 {{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="800px" width="800px" modebar="false">}}
 
 %DESCRIBE THESE
+
+## 
 
 ## Results and recommendations
 

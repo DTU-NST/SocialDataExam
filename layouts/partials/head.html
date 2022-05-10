@@ -1,0 +1,28 @@
+
+<head>
+    <title>{{ .Site.Title }} {{ with .Title }}- {{ . }} {{ end }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ "css/fonts.css" | absURL }}">
+    <link rel="stylesheet" type="text/css" href="{{ "css/fontawesome.css" | absURL }}">
+    <link rel="stylesheet" type="text/css" href="{{ "css/styles.css" | absURL }}">
+    {{ with resources.Get "css/userstyles.css" }}
+    <link rel="stylesheet" type="text/css" href="{{ .Permalink }}">
+    {{ end }}
+    {{ with .Site.Params.favicon }}
+    <link rel="icon" href="{{ . | absURL }}">
+    {{ end }}
+    <meta charset="UTF-8">
+    <meta name="author" content="{{ .Site.Params.Author }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ range .AlternativeOutputFormats -}}
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+  {{- if .Params.Plotly }}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{{- end }}
+  
+  {{ if .Params.vega }}
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+{{ end }}
+</head>
