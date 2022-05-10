@@ -128,3 +128,16 @@ We invite the reader to exercise a further investigation into the location of in
 Throughout our exploratory analysis of the dataset, we could observe a correlation between features such as floor area or year built and building EUI. These features are not entirely responsible for a larger EUI, but both positively correlate with a larger EUI. We could, however, observe a slight correlation between industry and building EUI, which intuitively also makes sense, as different activities consume different amounts of power. Furthermore, we explored some industries that had a low contribution to overall building EUI, but had a very large median EUI, such as the data centers. There are relatively few data centers in San Francisco and they therefore do not show up when you only account for total industry EUI. We also discovered that only accounting for median EUI for an industry also has issues, as it allowed industries that had a large proportion of total EUI of San Francisco to slip through unnoticed. As there was no clear way to get an overview of industry EUI, we decided to explore the degree to which different industries improve their building EUI throughout the years recorded in the dataset. Using the initial value in 2012, we created a rolling improvement variable, which proved that not all industries improve at equal pace, even when accounting for relative size. To further support our suggestions, we developed a simple machine learning model to predict the projected building EUI improvement for each industry. 
 
 Based on our rolling improvement variable and our projections for the different industries, we found two key industries that are not improving at the pace of the rest of San Francisco: automobile dealership and distribution centers. We suggest that the city of San Francisco focus on these two industries to decrease their overall building EUI. 
+
+## References
+The following are links to the data sources used in this project:
+ - [San Francisco Building Emissions](https://data.sfgov.org/resource/e4r6-2x4f.json)
+
+The following references were used in the creation of this project:
+ - [1. Emission Reductions From Pandemic Had Unexpected Effects on Atmosphere ](https://climate.nasa.gov/news/3129/emission-reductions-from-pandemic-had-unexpected-effects-on-atmosphere/)
+ - [2. What is EUI? ](https://aiacalifornia.org/energy-use-intensity-eui/)
+ - [3. TheilSenRegressor ](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.TheilSenRegressor.html)
+
+
+## Link to work
+[Github link to work](https://github.com/DTU-NST/SocialDataExamCode)
