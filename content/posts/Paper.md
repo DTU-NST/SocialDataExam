@@ -9,10 +9,10 @@ menu:
 ---
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 {{< load-plotly >}}
-{{< plotly json="plotly/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="/plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
 {{< plotly json="plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
@@ -51,7 +51,7 @@ An important step towards creating meaningful results from data analysis is to f
 ### Our approach to preprocessing the San Francisco dataset
 
 At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
-We made a subselection 
+We filtered the dataset by selecting a subset of attributes. 
 
 #THOMAS WRITE PREPROCESSING
 
