@@ -8,15 +8,15 @@ menu:
     weight: 1
   
 ---
+
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
 
----
-**What is EUI**
+***What is EUI***
 
-Energy use intensity (EUI) is an indicator of the energy efficiency of a building's design and/or operations[2]
----
+Energy use intensity (EUI) is an indicator of the energy efficiency of a building's design and/or operations[2].  EUI is expressed as thousands of British thermal units used per square foot per year (kBtu/sq. ft./year)
+
 
 ## You have your dataset, now what?
 
@@ -45,38 +45,38 @@ As we are looking to reduce building EUI in the future, we are looking for featu
 
  - Floor area
  - Year Built
- - Property type - self-reported%%%%%%%%%%WRITE CORRECT HERE, DONT REMEMBER
+ - Industry
+
+We have also identified areas as another candidate feature that could be correlated to the building EUI. 
 
 We started by examining the floor area and year built features by visualizing these against the EUI:
 
-{{< plotly json="../../plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/correlation_matrix.json" height="600px" width="600px" modebar="false">}}
 
 We found that, while both correlate with EUI to a small degree, they are not entirely able to explain the large variations in EUI between various buildings. 
 
-Next, we decided to examine the self reported property type by exploring which industries' had the highest building EUI. 
+Next, we decided to examine the industries by exploring which industries' had the highest building EUI. 
 
-%INSERT BAR PLOT
 {{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
 This proved to be a hard task, as not all industries are equally represented and some industries simply need a larger power consumption to function, thereby inflating its building EUI. 
+We observe from the figure how the data center has a high median EUI without being the largest consumer, while offices make up a large amount of the San Francisco's EUI, but at a lower median EUI.
 
-%INSERT TREEPLOT
-{{< plotly json="../../plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/source_eui_treemap.json" height="1200px" width="800px" modebar="false">}}
 
 We noticed the Offices and Data center industries as extreme examples of this. Offices are extremely overrepresented in the dataset, but each individual office does not have a high building EUI. In contrast, there are very few data centers, but each data center has a very high building EUI, as they inherently consume a lot of energy to power all the computing units. 
 
-%INSERT A BOXPLOT
-{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="600px" width="800px" modebar="false">}}
 
 As we can observe, different industries have vastly differing building EUI values, we concluded industries are correlated with building EUI, but we could not entirely explain the correlation. 
 
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
-{{< plotly json="../../plotly/percentage_change_by_industry_relative_2012.json" height="800px" width="800px">}}
+{{< loadIframe "https://dtu-nst.github.io/SocialDataExam/plotly/percentage_change_by_industry_relative_2012.html" >}}
 
 From this, we can observe that while most industries are clearly trending towards a lower median building EUI, a few are not. %WRITE WHICH
 
-We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter realms of machine learning. %EVALUATE?? CAN THIS BE USED??
+We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter realms of machine learning.
 
 
 ## Creating predictions
@@ -97,7 +97,13 @@ This shows that many industries follow the overall trend of building EUI, while 
 
 %DESCRIBE THESE
 
-## 
+## A geographical view of the EUI
+As we observe a general downwards trend in EUI we motivate a look at the geographical distribution of the industries' EUI.
+
+{{< loadIframe "https://dtu-nst.github.io/SocialDataExam/plotly/source_eui_by_postal_code_animated.html" >}}
+
+Luckily, the trend is generally the same across the different areas of San Francisco. 
+We invite the reader to exercise a further investigation into the location of industries for which we observe a positive percentage change, meaning an increase in EUI.
 
 ## Results and recommendations
 
