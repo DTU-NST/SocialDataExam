@@ -9,25 +9,25 @@ menu:
 ---
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 {{< load-plotly >}}
-{{< plotly json="/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../correlation_matrix.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../missing_data.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/missing_data.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
 {{< plotly json="../../sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
@@ -50,9 +50,9 @@ An important step towards creating meaningful results from data analysis is to f
 
 ### Our approach to preprocessing the San Francisco dataset
 
-At a first glance, the dataset contains a lot of missing data
+At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
 
-We then removed all N/A's and explored the compliance status for the different industries. We also filtered based on compliance, as we are interested in learning more about the emissions from the ones that comply.  
+
 #THOMAS WRITE PREPROCESSING
 
 ## Identifying interesting patterns
@@ -80,7 +80,7 @@ Next, we decided to examine the self reported property type by exploring which i
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
 %INSERT PLOT REGARDING PERCENTAGE CHANGE FROM 2012
-{{< plotly json="/plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 %EXPLAIN WHAT WE OBSERVE
 
 %MOTIVATE MACHINE LEARNING
@@ -107,8 +107,5 @@ Throughout our exploratory analysis of the dataset, we could observe a correlati
 
 
 %THEN DESCRIBE WHICH INDUSTRIES ARE GOOD AND BAD AND GIVE RECOMMENDATION
-{{< plotly json="/plotly/Benchmark.json" modebar="false">}}
-
-{{< plotly json="/plotly/Map1.json" height="800px" width="800px" modebar="false">}}
 
 test
