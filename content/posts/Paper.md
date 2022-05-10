@@ -1,6 +1,6 @@
 ---
 title: "Examining San Francisco building energy usage intensity"
-date: "2022-05-07"
+date: "2022-05-10"
 plotly: true
 menu:
   main:
@@ -8,7 +8,7 @@ menu:
     weight: 1
   
 ---
-
+{{< loadIframe link="https://upload.wikimedia.org/wikipedia/commons/0/0c/GoldenGateBridge-001.jpg" height="800px" >}}
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
@@ -27,7 +27,7 @@ An important step towards creating meaningful results from data analysis is to f
 At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
 We limited the dataset to a subset of attributes for the analysis as a step before removing missing values.
 One of the attributes in the dataset describes the compliance in reporting a building's Site EUI.
-While the dataset differentiates between commercial sites, residential housing and other, the compliance is primarily found for commercial sites. 
+While the dataset does differentiate between commercial sites, residential housing and other, it is only the commercial data where compliance is high and the data is sufficient for an analysis. 
 As the heart of the analysis concerns the Energy Usage Intensity (EUI), we filter for commercial properties and top off the preprocessing by removing any missing values.
 
 
@@ -37,9 +37,9 @@ Now for the fun parts of data analysis, exploring the nooks and crannies of your
 
 ### Controlled pattern exploration
 
-These questions helps you define your objective (if any) and provide you with hypothesis that you can explore by creating specific visualizations or plots related to the hypothesis. Our objective was recommend focus areas to reduce overall building emissions in San Francisco by reducing the overall EUI. We then explored the current trends in our dataset, which shows that the overall EUI of San Francisco is currently trending downwards. 
+These questions helps you define your objective (if any) and provide you with hypothesis that you can explore by creating specific visualizations or plots related to the hypothesis. Our objective was to recommend focus areas to reduce overall building emissions in San Francisco by reducing the overall EUI. We then explored the current trends in our dataset, which shows that the overall EUI of San Francisco is currently trending downwards. 
 
-{{< plotly json="../../plotly/yearly_total_emissions.json" height="600px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_total_emissions.json" height="600px" width="800px">}}
 
 As we are looking to reduce building EUI in the future, we are looking for features that can be shown to be correlated with building EUI. When going through the features in our dataset, we identified three candidate features that could be correlated with building EUI: 
 
@@ -47,26 +47,24 @@ As we are looking to reduce building EUI in the future, we are looking for featu
  - Year Built
  - Industry
 
-We have also identified areas as another candidate feature that could be correlated to the building EUI. 
+We have also identified areas as another candidate feature that could be correlated to the building EUI. We started by examining the floor area and year built features by visualizing these against the EUI:
 
-We started by examining the floor area and year built features by visualizing these against the EUI:
-
-{{< plotly json="../../plotly/correlation_matrix.json" height="600px" width="600px" modebar="false">}}
+{{< plotly json="../../plotly/correlation_matrix.json" height="600px" width="600px">}}
 
 We found that, while both correlate with EUI to a small degree, they are not entirely able to explain the large variations in EUI between various buildings. 
 
 Next, we decided to examine the industries by exploring which industries' had the highest building EUI. 
 
-{{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px">}}
 
-This proved to be a hard task, as not all industries are equally represented and some industries simply need a larger power consumption to function, thereby inflating its building EUI. 
-We observe from the figure how the data center has a high median EUI without being the largest consumer, while offices make up a large amount of the San Francisco's EUI, but at a lower median EUI.
+This proved to be a hard task, as not all industries are equally represented and some industries simply have a higher energy usage to function, thereby inflating its building EUI. 
+We observe from the figure how the data center has a high median EUI, but in comparison to the following plot, we observe how the data center industry as a whole emits less than many other industries. 
 
-{{< plotly json="../../plotly/source_eui_treemap.json" height="1200px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/source_eui_treemap.json" height="1200px" width="800px">}}
 
-We noticed the Offices and Data center industries as extreme examples of this. Offices are extremely overrepresented in the dataset, but each individual office does not have a high building EUI. In contrast, there are very few data centers, but each data center has a very high building EUI, as they inherently consume a lot of energy to power all the computing units. 
+We noticed the Data center industry as an extreme example of the skewed representation. Offices are extremely overrepresented in the dataset, but each individual office does not have a high building EUI (kBtu/ft2). In contrast, there are very few data centers, but each data center has a very high building EUI (kBtu/ft2), as they inherently consume a lot of energy to power all the computing units in a relatively small space. 
 
-{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="600px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/median_eui_by_industry_by_year.json" height="600px" width="800px">}}
 
 As we can observe, different industries have vastly differing building EUI values, we concluded industries are correlated with building EUI, but we could not entirely explain the correlation. 
 
@@ -74,9 +72,15 @@ As we could not explain the correlation between industry and EUI, we decided to 
 
 {{< loadIframe link="https://dtu-nst.github.io/SocialDataExam/plotly/percentage_change_by_industry_relative_2012.html" >}}
 
-From this, we can observe that while most industries are clearly trending towards a lower median building EUI, a few are not. %WRITE WHICH
+From this, we can observe that while most industries are clearly trending towards a lower building EUI as indicated by the negative percentage change, a few are not. These industries include: 
 
-We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter realms of machine learning.
+- Automobile Dealerships
+- Distribution centers
+- Non-refrigerated warehousing
+- Laboratories
+- Retail stores
+
+We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter realm of machine learning.
 
 
 ## Creating predictions
@@ -89,28 +93,38 @@ We can observe that building EUI is seemingly dependant on the industry connecte
 
 Based on the predictions obtained from the model, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
 
-{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="600px" width="800px">}}
 
 This shows that many industries follow the overall trend of building EUI, while others don't. We are therefore interested in using our model to predict what will happen for the foreseeable future: 
 
-{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="600px" width="800px">}}
 
+We can now observe that the list of industries with the least projected improvement change:
 
-%DESCRIBE THESE
+- Strip mall
+- Automobile Dealership
+- Enclosed mall
+- Data center
+- Distribution centers
+
+While some industries remain, such as automobile dealership, other have now emerged as front runners, such as strip malls amd data centers. Due to the large amount of uncertainty in the future, we have decided to only suggest those that are on both short-lists of least improvement, which leaves us with two industries:
+
+- Automobile Dealership
+- Distribution centers
+
+These industries are the ones we suggest the city of San Francisco take a look at, as they do not seem to follow the downwards trend of building EUI. These industries should be held accountable for their inaction and surveys should be conducted to map the sources of their building EUI. 
 
 ## A geographical view of the EUI
 As we observe a general downwards trend in EUI we motivate a look at the geographical distribution of the industries' EUI.
 
 {{< loadIframe link="https://dtu-nst.github.io/SocialDataExam/plotly/source_eui_by_postal_code_animated.html" >}}
 
-Luckily, the trend is generally the same across the different areas of San Francisco. 
+Luckily, the trend is generally the same across the different areas of San Francisco.
+
 We invite the reader to exercise a further investigation into the location of industries for which we observe a positive percentage change, meaning an increase in EUI.
 
 ## Results and recommendations
 
-Throughout our exploratory analysis of the dataset, we could observe a correlation between features such as floor area or year built and building EUI. These features are not entirely responsible for a larger EUI, but both positively correlate with a larger EUI. We could, however, observe a slight correlation between industry and building EUI, which intuitively also makes sense, as different activities consume different amounts of power. Furthermore, we explored some industries that had a low contribution to overall building EUI, but had a very large median EUI, such as the data centers. There are relatively few data centers in San Francisco and they therefore do not show up when you only account for total industry EUI. We also discovered that only accounting for median EUI for an industry also has issues, as it allowed industries that had a large proportion of total EUI of San Francisco to slip through unnoticed. As there was no clear way to get an overview of industry EUI, we decided to explore the degree to which different industries improve their building EUI throughout the years recorded in the dataset. Using the initial value in 2012, we created a rolling improvement variable, which proved that not all industries improve at equal pace, even when accounting for relative size. 
+Throughout our exploratory analysis of the dataset, we could observe a correlation between features such as floor area or year built and building EUI. These features are not entirely responsible for a larger EUI, but both positively correlate with a larger EUI. We could, however, observe a slight correlation between industry and building EUI, which intuitively also makes sense, as different activities consume different amounts of power. Furthermore, we explored some industries that had a low contribution to overall building EUI, but had a very large median EUI, such as the data centers. There are relatively few data centers in San Francisco and they therefore do not show up when you only account for total industry EUI. We also discovered that only accounting for median EUI for an industry also has issues, as it allowed industries that had a large proportion of total EUI of San Francisco to slip through unnoticed. As there was no clear way to get an overview of industry EUI, we decided to explore the degree to which different industries improve their building EUI throughout the years recorded in the dataset. Using the initial value in 2012, we created a rolling improvement variable, which proved that not all industries improve at equal pace, even when accounting for relative size. To further support our suggestions, we developed a simple machine learning model to predict the projected building EUI improvement for each industry. 
 
-
-%THEN DESCRIBE WHICH INDUSTRIES ARE GOOD AND BAD AND GIVE RECOMMENDATION
-
-test
+Based on our rolling improvement variable and our projections for the different industries, we found two key industries that are not improving at the pace of the rest of San Francisco: automobile dealership and distribution centers. We suggest that the city of San Francisco focus on these two industries to decrease their overall building EUI. 
