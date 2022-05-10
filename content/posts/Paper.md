@@ -9,23 +9,24 @@ menu:
 ---
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
 {{< load-plotly >}}
-{{< plotly json="../../Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/missing_data.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/missing_data.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
 
-{{< plotly json="/plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../SocialDataExam/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
+
+{{< plotly json="../../SocialDataExam/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
 
@@ -41,6 +42,9 @@ It works with almost all markdown flavours (the below blank line matters).
 An important step towards creating meaningful results from data analysis is to first take a step backwards and consider the data at your disposal. Do you have some columns that are irrelevant the problem at hand or are you missing key data values or do you wish to create new columns based on the existing ones to provide context to the dataset? In any case, you will likely need to do some data preprocessing to ensure that your dataset is sanitized and ready to be processed. Preprocessing is an activity that is largely individual for each dataset, as what needs to be done is entirely dependant on the dataset itself and the aim of the data analysis. 
 
 ### Our approach to preprocessing the San Francisco dataset
+
+
+#THOMAS WRITE PREPROCESSING
 
 ## Identifying interesting patterns
 
