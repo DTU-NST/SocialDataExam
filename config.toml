@@ -1,4 +1,4 @@
-baseURL = 'https://<USERNAME>.github.io'
+baseURL = 'https://dtu-nst.github.io/SocialDataExam/'
 languageCode = 'en-us'
 title = 'Social Data Final Project'
 mainSections = ["posts"]
