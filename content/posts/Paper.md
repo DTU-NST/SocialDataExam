@@ -30,7 +30,7 @@ menu:
 {{< plotly json="plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="../../sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="plotly/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
 {{< plotly json="plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
@@ -51,7 +51,7 @@ An important step towards creating meaningful results from data analysis is to f
 ### Our approach to preprocessing the San Francisco dataset
 
 At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
-
+We made a subselection 
 
 #THOMAS WRITE PREPROCESSING
 
