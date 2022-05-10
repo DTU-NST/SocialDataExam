@@ -7,41 +7,17 @@ menu:
     weight: 1
   
 ---
+{{< load-plotly >}}
+
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 # Building energy usage in San Francisco and how to use data science and machine learning to explore solutions to reduce them
-{{< load-plotly >}}
-{{< plotly json="../../plotly/Commercial_benchmark_status.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/missing_data.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
-
-{{< load-plotly >}}
-{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
 
 ---
-**NOTE**
+**What is EUI**
 
-It works with almost all markdown flavours (the below blank line matters).
-
+Energy use intensity (EUI) is an indicator of the energy efficiency of a building’s design and/or operations[2]
 ---
 
 ## You have your dataset, now what?
@@ -51,11 +27,11 @@ An important step towards creating meaningful results from data analysis is to f
 ### Our approach to preprocessing the San Francisco dataset
 
 At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
-We limited the dataset to a subset of attributes for the analysis as step before remov
+We limited the dataset to a subset of attributes for the analysis as a step before removing missing values.
+One of the attributes in the dataset describes the compliance in reporting a building's Site EUI.
+While the dataset differentiates between commercial sites, residential housing and other, the compliance is primarily found for commercial sites. 
+As the heart of the analysis concerns the Energy Usage Intensity (EUI), we filter for commercial properties and top off the preprocessing by removing any missing values.
 
- and removed the records with missing values.
-
-#THOMAS WRITE PREPROCESSING
 
 ## Identifying interesting patterns
 
@@ -71,7 +47,7 @@ As we are looking to reduce building EUI in the future, we are looking for featu
  - Year Built
  - Property type - self-reported%%%%%%%%%%WRITE CORRECT HERE, DONT REMEMBER
 
-We started by examining the floor area and year built features by plotting these against the EUI in separate scatter plots and visualizing the trend:
+We started by examining the floor area and year built features by visualizing these against the EUI:
 
 {{< plotly json="../../plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
@@ -81,25 +57,28 @@ Next, we decided to examine the self reported property type by exploring which i
 
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
-%INSERT PLOT REGARDING PERCENTAGE CHANGE FROM 2012
 {{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
-%EXPLAIN WHAT WE OBSERVE
 
-%MOTIVATE MACHINE LEARNING
+From this, we can observe that while most industries are clearly trending towards a lower median building EUI, a few are not. %WRITE WHICH
+
+We are interested to predict whether these trends are projected to continue, before we feel comfortable making suggestions to improve building EUI in San Francisco. To do this, we must enter the dark and scary territory of machine learning. %EVALUATE?? CAN THIS BE USED??
+
 
 ## Creating predictions
 
-As we deal with an immense amount of data, we must unfortunately (for some) venture into the uncharted lands of Machine Learning to make any relevant predictions for the future. Luckily, it has never been easier to enter these uncharted lands, as libraries and online guides make it as easy to create a machine learning model as it is to fill out an online form: just input the variables and you're off! Of course, some online forms are complicated and require information that is not readily available to you and you therefore need to do some digging to find it. Likewise, you sometimes need to tweak small details regarding your machine learning model to ensure that the results are adequate. We will briefly discuss our machine learning model and how we use the model's predictions as a basis for our suggestions for San Francisco to reduce building EUI. 
+As we deal with a reasonably sized dataset, we must unfortunately (for some) venture into the uncharted lands of machine learning to make any relevant predictions for the future. Luckily, it has never been easier to enter these uncharted lands, as libraries and online guides make it as easy to create a machine learning model as it is to fill out an online form: just input the variables and you're off! Of course, some online forms are complicated and require information that is not readily available to you and you therefore need to do some digging to find it. Likewise, you sometimes need to tweak small details regarding your machine learning model to ensure that the results are adequate. We will briefly discuss our machine learning model and how we use the model's predictions as a basis for our suggestions for San Francisco to reduce building EUI. 
 
-We can observe that building EUI is seemingly dependant on the industry connected to the building and that some industries have seemingly taken steps to reduce their building EUI, while others have not. We therefore decided to explore how the industries' building EUI could develop in the future, if current trends hold. To do this, we developed a machine learning model, using linear regression, to predict the building EUI of each industry for the next two years. The initial model, let's call it Emel, is just a linear regression model %THOMAS PLEASE WRITE
+We can observe that building EUI is seemingly dependant on the industry connected to the building and that some industries have seemingly taken steps to reduce their building EUI, while others have not. We therefore decided to explore how the industries' building EUI could develop in the future, if current trends hold. To do this, we applied a very simple linear model, using a robust variant of linear regression called "TheilSenRegressor"[3] to predict the percentage change in EUI of each industry for the next two years. 
 
 ## Exploring industries' effect on building EUI in the future
 
-Based on Emel's predictions, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
+Based on the predictions obtained from the model, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
 
-%INSERT CURRENT INDUSTRY TRENDS LINE PLOT (WITHOUT ML PREDS)(OR MAYBE BOTH, SWITCHING BY BUTTON??)
+{{< plotly json="../../plotly/percentage_change_by_industry_relative_2012.json" height="800px" width="800px" modebar="false">}}
 
-%INSERT ML PREDICTIONS
+This shows that many industries follow the overall trend of building EUI, while others don't. We are therefore interested in using our model to predict what will happen for the foreseeable future: 
+
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="800px" width="800px" modebar="false">}}
 
 %DESCRIBE THESE
 
