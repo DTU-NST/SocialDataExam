@@ -15,25 +15,25 @@ menu:
 {{< plotly json="../../plotly/Commercial_benchmark_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/log_source_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/missing_data.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/missing_data.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/source_eui_treemap.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/sum_of_eui_by_year_and_industry.json" height="800px" width="800px" modebar="false">}}
 
 {{< load-plotly >}}
-{{< plotly json="plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 
 The global pandemic has only just released its grip on much of the world, but while the world was distracted, another threat to humanity tightened its grip: global warming. While the pandemic has had surprising effects[1] upon the climate, global warming is still as large a threat to the long-term future of civilization. With oceans rising, increasing amounts of extreme weather and rising temperatures, it is clear that we must reduce carbon emissions and that we should encourage any reductions, however small they may be. We have therefore decided to explore how the city of San Francisco can analyze their building energy usage intensity (EUI) and where an increased effort is needed, based on the results of the analysis. We aim to do this by observing the building EUI for different industries from the city of San Francisco and provide thorough explanations to what we do and why we do it, such that other cities will be able to replicate the steps we have taken and thus make informed decisions regarding where they can reduce their own building EUI. We do this by first introducing our steps to preprocess our data, then we explore which industries' have the largest EUI and lastly, provide a framework for how to evaluate the results of the analysis and make informed decisions, backed by data. 
 
@@ -51,7 +51,7 @@ An important step towards creating meaningful results from data analysis is to f
 ### Our approach to preprocessing the San Francisco dataset
 
 At a first glance, the dataset contains a lot of missing data, which needs to preprocessed before diving into an analysis.
-We limited the dataset to a subset of attributes
+We limited the dataset to a subset of attributes for the analysis as step before remov
 
  and removed the records with missing values.
 
@@ -73,7 +73,7 @@ As we are looking to reduce building EUI in the future, we are looking for featu
 
 We started by examining the floor area and year built features by plotting these against the EUI in separate scatter plots and visualizing the trend:
 
-{{< plotly json="/plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/correlation_matrix.json" height="800px" width="800px" modebar="false">}}
 
 We found that, while both correlate with EUI to a small degree, they are not entirely able to explain the large variations in EUI between various buildings. 
 
@@ -82,7 +82,7 @@ Next, we decided to examine the self reported property type by exploring which i
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
 %INSERT PLOT REGARDING PERCENTAGE CHANGE FROM 2012
-{{< plotly json="plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
 %EXPLAIN WHAT WE OBSERVE
 
 %MOTIVATE MACHINE LEARNING
