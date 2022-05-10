@@ -72,7 +72,7 @@ As we can observe, different industries have vastly differing building EUI value
 
 As we could not explain the correlation between industry and EUI, we decided to take a closer look on their relationship. As we have observed that overall EUI in San Francisco is currently trending downwards, we are interested in exploring which different industries follow this trend and, more importantly, those that don't. We have done this by observing the relative change for each year for every industry, from the benchmark in 2012:
 
-{{< loadIframe "https://dtu-nst.github.io/SocialDataExam/plotly/percentage_change_by_industry_relative_2012.html" >}}
+{{< loadIframe link="https://dtu-nst.github.io/SocialDataExam/plotly/percentage_change_by_industry_relative_2012.html" >}}
 
 From this, we can observe that while most industries are clearly trending towards a lower median building EUI, a few are not. %WRITE WHICH
 
@@ -89,9 +89,10 @@ We can observe that building EUI is seemingly dependant on the industry connecte
 
 Based on the predictions obtained from the model, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
 
-{{< plotly json="../../plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
 
 This shows that many industries follow the overall trend of building EUI, while others don't. We are therefore interested in using our model to predict what will happen for the foreseeable future: 
+
 {{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="800px" width="800px" modebar="false">}}
 
 
@@ -100,7 +101,7 @@ This shows that many industries follow the overall trend of building EUI, while 
 ## A geographical view of the EUI
 As we observe a general downwards trend in EUI we motivate a look at the geographical distribution of the industries' EUI.
 
-{{< loadIframe "https://dtu-nst.github.io/SocialDataExam/plotly/source_eui_by_postal_code_animated.html" >}}
+{{< loadIframe link="https://dtu-nst.github.io/SocialDataExam/plotly/source_eui_by_postal_code_animated.html" >}}
 
 Luckily, the trend is generally the same across the different areas of San Francisco. 
 We invite the reader to exercise a further investigation into the location of industries for which we observe a positive percentage change, meaning an increase in EUI.

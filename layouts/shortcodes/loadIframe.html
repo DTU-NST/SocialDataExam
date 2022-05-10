@@ -1,5 +1,5 @@
 <!-- layouts/shortcodes/iframe.html -->
-{{ $json := .Get "json" }}
+{{ $link := .Get "link" }}
 {{ $height := .Get "height" | default "1050px" }}
 {{ $width := .Get "width" | default "1100px" }}
 
@@ -8,4 +8,4 @@
         obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
   }
 </script>
-<iframe src="{{ .Get 0 }}" style="height:{{$height}};width:{{$width}};border:none;overflow:hidden;"></iframe>
+<iframe src="{{$link}}" style="height:{{$height}};width:{{$width}};border:none;overflow:hidden;"></iframe>
