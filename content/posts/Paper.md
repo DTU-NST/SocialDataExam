@@ -39,7 +39,7 @@ Now for the fun parts of data analysis, exploring the nooks and crannies of your
 
 These questions helps you define your objective (if any) and provide you with hypothesis that you can explore by creating specific visualizations or plots related to the hypothesis. Our objective was recommend focus areas to reduce overall building emissions in San Francisco by reducing the overall EUI. We then explored the current trends in our dataset, which shows that the overall EUI of San Francisco is currently trending downwards. 
 
-{{< plotly json="../../plotly/yearly_total_emissions.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/yearly_total_emissions.json" height="600px" width="800px" modebar="false">}}
 
 As we are looking to reduce building EUI in the future, we are looking for features that can be shown to be correlated with building EUI. When going through the features in our dataset, we identified three candidate features that could be correlated with building EUI: 
 
@@ -89,11 +89,11 @@ We can observe that building EUI is seemingly dependant on the industry connecte
 
 Based on the predictions obtained from the model, we can now explore how the different industries' building EUI project into the future and based on this we can explore the different avenues that San Francisco has to reduce their building EUI to reduce their overall emissions. To contextualize this, we first recap the current trends for each industry:
 
-{{<  plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry.json" height="800px" width="800px" modebar="false">}}
+{{< plotly json="../../plotly/median_eui_by_industry_by_year.json" height="800px" width="800px" modebar="false">}}
 
 This shows that many industries follow the overall trend of building EUI, while others don't. We are therefore interested in using our model to predict what will happen for the foreseeable future: 
-
 {{< plotly json="../../plotly/yearly_percentage_change_in_eui_by_industry_with_predictions.json" height="800px" width="800px" modebar="false">}}
+
 
 %DESCRIBE THESE
 
